@@ -1,0 +1,75 @@
+#include<stdio.h>
+#define max 10
+
+int queue[max];
+int front = 0, rear = 0;
+int isEmpty();
+int isFull();
+int add(int);
+void pop();
+void display();
+int main(){
+    int n;
+    int data;
+    int result = 0;
+    
+    do{
+        printf("\n1. 삽입\n2. 삭제\n3. 조회\n4. 종료\n");
+        printf("입력 : ");
+        scanf("%d", &n);
+        switch(n){
+            case 1:
+                printf("\n삽입할 값 : ");
+                scanf("%d", &data);
+                add(data);
+                break;
+            case 2:
+                pop();
+                break;
+            case 3:
+                display();
+                break;
+            case 4:
+                result = 1;
+                break;
+            
+        }
+    }while(result == 0);
+    return 0;
+}
+int isEmpty(){
+    if(front == rear)
+        return 0;
+    return 1;
+}
+int isFull(){
+    if(rear == max - 1)
+        return 0;
+    return 1;
+}
+int add(int x){
+    if(!isFull()){
+        printf("Queue가 꽉 차있습니다.");
+    }
+    else{
+        
+        queue[rear] = x;
+        rear++;
+    }
+    return queue[front];
+}
+void pop(){
+    if(!isEmpty()){
+        printf("Queue가 비었습니다.");
+    }
+    else{
+        printf("\n삭제된 값 : %d",queue[front]);
+        front += 1;
+    }
+}
+void display(){
+    printf("\n큐: ");
+    for(int i = front;i < rear;i++){
+        printf(" %d", queue[i]);
+    }
+}
